@@ -5,6 +5,7 @@ const { exec } = require("child_process");
 
 let rawdata = null;
 let sample  = {
+	"reset": false,
 	"addrFrom": "192.168.242.131",
 	"addrTo": "192.168.0.10",
 	"portList": [
@@ -54,6 +55,11 @@ function runCommand(cmd){
     }
     //console.log(`stdout: ${stdout}`);
 });
+}
+
+// limpando regras anteriores
+if(obj.reset){
+  commands.push("netsh interface portproxy reset");
 }
 
 // liberação de porta avulsa
